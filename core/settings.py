@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_bootstrap5',
+    'products.apps.ProductsConfig',
+    'sales.apps.SalesConfig',
 ]
 
 MIDDLEWARE = [
@@ -75,7 +78,11 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': 'sales_hub_db',
+        'USER': 'postgres',
+        'PASSWORD': 'Postgre2026#',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
