@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Sales Hub{% endblock %}
+
+{% block content %}
+<div class="text-center py-5">
+    <h1 class="display-4">Bem-vindo ao Sales Hub</h1>
+    <p class="lead">Sistema de vendas desenvolvido para o teste da SEMEQ</p>
+    
+    <div class="mt-5">
+        <a href="{% url 'sales:sale_create' %}" class="btn btn-primary btn-lg">Nova Venda</a>
+    </div>
+</div>
+{% endblock %}

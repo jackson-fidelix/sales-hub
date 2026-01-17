@@ -1,0 +1,45 @@
+/* Navbar aprimorada */
+.navbar {
+    border: none !important;
+    border-width: 0 !important;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-nav {
+    margin: 0 auto !important;
+}
+
+.navbar-primary {
+    background-color: #000000 !important; /* azul escuro mais bonito */
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.nav-link {
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ffee00 !important; /* azul claro no hover */
+    transform: scale(1.05);
+}
+
+@media (min-width: 992px) {
+    .navbar-nav {
+        margin: 0 auto;
+    }
+}
+
+.title-blue-dark {
+    color: #03173d;
+    text-shadow: 0 2px 5px rgb(116, 116, 116);
+}
+
+.table-blue-dark th {
+    background-color: #03173d;
+    color: #ffffff;
+}

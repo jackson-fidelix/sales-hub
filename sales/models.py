@@ -10,14 +10,14 @@ class Customer(models.Model):
         return self.name
 
 class Sale(models.Model):
-    date = models.DateField()
-    customer = models.ForeignKey(Customer, on_delete=models.PROTECT)
-    delivery_street = models.CharField(max_length=200)
-    delivery_neighborhood = models.CharField(max_length=100)
-    delivery_city = models.CharField(max_length=100)
-    delivery_state = models.CharField(max_length=2)
-    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    date = models.DateField(verbose_name="Data")
+    customer = models.ForeignKey(Customer, on_delete=models.PROTECT, verbose_name="Cliente")
+    delivery_street = models.CharField(max_length=200, verbose_name="Rua de entrega")
+    delivery_neighborhood = models.CharField(max_length=100, verbose_name="Bairro")
+    delivery_city = models.CharField(max_length=100, verbose_name="Cidade")
+    delivery_state = models.CharField(max_length=2, verbose_name="Estado")
+    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Criado por")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Criado em")
 
     def __str__(self):
         return f"Venda #{self.pk} - {self.customer} - {self.date}"

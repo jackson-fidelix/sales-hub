@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Nova Venda - Sales Hub{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 title-blue-dark">Nova Venda</h2>
+
+    <form method="post" id="sale-form">
+        {% csrf_token %}
+
+        <div class="row g-3 mb-4">
+            <div class="col-md-4">
+                {{ form.date.label_tag }}
+                {{ form.date }}
+            </div>
+            <div class="col-md-8">
+                {{ form.customer.label_tag }}
+                {{ form.customer }}
+            </div>
+        </div>
+
+        <!-- Endereço com CEP que será puxado pela API VIACEP -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-3">
+                <label for="id_cep" class="form-label">CEP</label>
+                <input type="text" id="id_cep" class="form-control" maxlength="9" placeholder="00000-000">
+            </div>
+            <div class="col-md-6">
+                {{ form.delivery_street.label_tag }}
+                {{ form.delivery_street }}
+            </div>
+            <div class="col-md-3">
+                {{ form.delivery_state.label_tag }}
+                {{ form.delivery_state }}
+            </div>
+        </div>
+        <div class="row g-3 mb-4">
+            <div class="col-md-6">
+                {{ form.delivery_city.label_tag }}
+                {{ form.delivery_city }}
+            </div>
+            <div class="col-md-6">
+                {{ form.delivery_neighborhood.label_tag }}
+                {{ form.delivery_neighborhood }}
+            </div>
+        </div>
+
+        <h4 class="mt-4 title-blue-dark">Itens da Venda</h4>
+        {{ item_formset.management_form }}
+        <table class="table table-bordered table-hover" id="items-table">
+            <thead class="table-blue-dark">
+                <tr>
+                    <th>Produto</th>
+                    <th>Fornecedores</th>
+                    <th>Valor Unitário</th>
+                    <th>Quantidade</th>
+                    <th>Subtotal</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for form in item_formset %}
+                <tr class="item-row">
+                    <td>{{ form.product }}</td>
+                    <td class="suppliers-cell text-muted">Selecione o produto...</td>
+                    <td><input type="text" class="form-control unit-price" readonly></td>
+                    <td>{{ form.quantity }}</td>
+                    <td class="subtotal-cell fw-bold text-success">R$ 0,00</td>
+                    <td><button type="button" class="btn btn-danger btn-sm remove-row">Remover</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <button type="button" id="add-item" class="btn btn-primary mb-3" onclick="adicionarProduto()">+ Adicionar Produto</button>
+
+        <div class="text-end mt-4">
+            <h5>Total da Venda: <span id="total-venda" class="text-success fw-bold">R$ 0,00</span></h5>
+        </div>
+
+        <button type="submit" class="btn btn-success btn-lg w-100 mt-4">Registrar Venda</button>
+    </form>
+</div>
+    <script src="{% static 'js/script.js' %}"></script>
+
+{% endblock %}
