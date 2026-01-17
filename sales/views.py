@@ -1,7 +1,7 @@
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
-from .models import Sale
-from .forms import SaleForm, SaleItemFormSet, SaleItem, SaleItemForm, inlineformset_factory
+from .models import Sale, Customer
+from .forms import SaleForm, SaleItemFormSet, SaleItem, SaleItemForm
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from products.models import Product
@@ -10,7 +10,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 def home(request):
-    return render(request, 'base.html', {
+    return render(request, 'home.html', {
         'title': 'Sales Hub - Portal de Vendas',
         'mensagem': 'Bem-vindo ao sistema de vendas!',
     })
@@ -60,8 +60,6 @@ class SaleCreateView(CreateView):
 
         return redirect(self.success_url)
 
-
-
 def api_product(request, pk):
     logger.info(f"Chamando API para PK: {pk}")
     try:
@@ -77,3 +75,17 @@ def api_product(request, pk):
     except Product.DoesNotExist:
         return JsonResponse({'error': 'Produto não encontrado'}, status=404)
     
+def sales_history(request):
+    sales = Sale.objects.select_related('customer').all()
+
+    customer_name = request.GET.get('customer', '')
+
+    if customer_name:
+        sales = sales.filter(
+            customer__name__icontains=customer_name
+        )
+
+    return render(request, 'sales/sales_history.html', {
+        'sales': sales,
+        'customer_name': customer_name
+    })

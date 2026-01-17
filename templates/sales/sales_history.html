@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Histórico de Vendas{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <h2 class="mb-4 title-blue-dark">Histórico de Vendas</h2>
+
+    <form method="get" class="mb-4">
+        <div class="row">
+            <div class="col-md-6">
+                <input
+                    type="text"
+                    name="customer"
+                    class="form-control"
+                    placeholder="Nome do cliente"
+                    value="{{ customer_name }}"
+                >
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">
+                    Buscar
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-blue-dark">
+                <tr>
+                    <th>Cliente</th>
+                    <th>Data</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sale in sales %}
+                    <tr>
+                        <td>{{ sale.customer.name }}</td>
+                        <td>{{ sale.date|date:"d/m/Y" }}</td>
+                        <td class="fw-bold text-success">
+                            R$ {{ sale.get_total }}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="3" class="text-center text-muted">
+                            Nenhum histórico encontrado
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock %}

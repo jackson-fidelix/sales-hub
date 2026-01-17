@@ -1,14 +1,51 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Home - Sales Hub{% endblock %}
 
 {% block content %}
-<div class="text-center py-5">
-    <h1 class="display-4">Bem-vindo ao Sales Hub</h1>
-    <p class="lead">Sistema de vendas desenvolvido para o teste da SEMEQ</p>
-    
-    <div class="mt-5">
-        <a href="{% url 'sales:sale_create' %}" class="btn btn-primary btn-lg">Nova Venda</a>
+<div class="container text-center py-5">
+
+    <!-- Perfil -->
+    <div class="mb-4">
+        <img
+            src="{% static 'img/profile.jpg' %}"
+            alt="Jackson Felipe Fidelix"
+            class="rounded-circle shadow"
+            width="140"
+        >
     </div>
+
+    <h1 class="fw-bold">Jackson Felipe Fidelix</h1>
+    <p class="text-muted mb-3">
+        Desenvolvedor Full Stack • Python • Django • SQL • JavaScript • PostgreSQL • AWS
+    </p>
+
+    <p class="lead">
+        <strong>Sales Hub</strong> é um sistema de vendas desenvolvido
+        como projeto prático, focado em backend com Django,
+        persistência de dados e integração com frontend.
+    </p>
+
+    <div class="d-flex justify-content-center gap-3 mt-4">
+        <a href="https://github.com/jackson-fidelix/" target="_blank" class="btn btn-outline-dark">
+            <i class="bi bi-github"></i> GitHub
+        </a>
+
+        <a href="https://www.linkedin.com/in/jacksonfidelix/" target="_blank" class="btn btn-outline-primary">
+            <i class="bi bi-linkedin"></i> LinkedIn
+        </a>
+
+        <a href="https://www.instagram.com/_jacksonfidelix/" target="_blank" class="btn btn-outline-danger">
+            <i class="bi bi-instagram"></i> Instagram
+        </a>
+    </div>
+
+    <div class="mt-5">
+        <a href="{% url 'sales:sale_create' %}" class="btn btn-primary btn-lg px-5">
+            Nova Venda
+        </a>
+    </div>
+
 </div>
 {% endblock %}
