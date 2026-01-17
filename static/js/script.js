@@ -69,19 +69,40 @@ document.addEventListener('DOMContentLoaded', function () {
     const tableBody = document.querySelector('#items-table tbody');
 
     function adicionarProduto() {
-        const firstRow = tableBody.querySelector('.item-row');
+        const totalFormsInput = document.getElementById('id_items-TOTAL_FORMS');
+        let totalForms = parseInt(totalFormsInput.value);
 
-        const newRow = firstRow.cloneNode(false);
-        newRow.innerHTML = firstRow.innerHTML;
+        const lastQuantity = document.querySelector(
+            `input[name="items-${totalForms - 1}-quantity"]`
+        );
 
-        newRow.querySelector('.product-select').value = '';
-        newRow.querySelector('.quantity').value = 1;
-        newRow.querySelector('.unit-price').value = '';
-        newRow.querySelector('.suppliers-cell').innerHTML = 'Selecione o produto...';
-        newRow.querySelector('.subtotal-cell').textContent = 'R$ 0,00';
+        if (!lastQuantity || lastQuantity.value === "") {
+            alert("Preencha a quantidade antes de adicionar outro produto.");
+            return;
+        }
+
+        const tableBody = document.querySelector('#items-table tbody');
+        const lastRow = tableBody.querySelector('.item-row:last-child');
+        const newRow = lastRow.cloneNode(true);
+
+        newRow.innerHTML = newRow.innerHTML.replace(
+            new RegExp(`items-${totalForms - 1}`, 'g'),
+            `items-${totalForms}`
+        );
+
+        newRow.querySelectorAll('input').forEach(input => {
+            input.value = '';
+        });
+
+        // reseta selects
+        newRow.querySelectorAll('select').forEach(select => {
+            select.selectedIndex = 0;
+        });
 
         tableBody.appendChild(newRow);
+        totalFormsInput.value = totalForms + 1;
     }
+
 
     // Eventos
     tableBody.addEventListener('change', function (e) {

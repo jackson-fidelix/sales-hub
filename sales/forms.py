@@ -21,7 +21,7 @@ class SaleForm(forms.ModelForm):
 class SaleItemForm(forms.ModelForm):
     class Meta:
         model = SaleItem
-        fields = ['product', 'quantity', 'unit_price']
+        fields = ['product', 'quantity']
         widgets = {
             'product': forms.Select(attrs={'class': 'form-control product-select'}),
             'quantity': forms.NumberInput(attrs={'class': 'form-control quantity', 'min': 1}),
