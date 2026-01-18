@@ -66,8 +66,8 @@ DATABASES = {
 }
 ```
 ### 6. Rode as migrations
-  python manage.py makemigrations (nome do seu app)
-  python manage.py migrate
+- python manage.py makemigrations (nome do seu app)
+- python manage.py migrate
 
 ### 7. Criar superuser (admin)
 - Com isso voce pode acessar a tela admin do sistema. Comando:
