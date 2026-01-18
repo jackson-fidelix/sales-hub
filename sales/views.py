@@ -1,6 +1,7 @@
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
-from .models import Sale, Customer
+from .models import Sale, Customer, SaleItem
+from django.db.models import Prefetch
 from .forms import SaleForm, SaleItemFormSet, SaleItem, SaleItemForm
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
@@ -76,10 +77,17 @@ def api_product(request, pk):
         return JsonResponse({'error': 'Produto não encontrado'}, status=404)
     
 def sales_history(request):
-    sales = Sale.objects.select_related('customer').all()
-
     customer_name = request.GET.get('customer', '')
 
+    sales = (
+        Sale.objects.select_related('customer')
+        .prefetch_related(
+            Prefetch('items', queryset=SaleItem.objects.select_related('product')
+            )
+        )
+        .order_by("-created_at")
+    )
+    
     if customer_name:
         sales = sales.filter(
             customer__name__icontains=customer_name

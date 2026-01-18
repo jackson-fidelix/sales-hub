@@ -32,25 +32,30 @@
                 <tr>
                     <th>Cliente</th>
                     <th>Data</th>
+                    <th>Produtos</th>
                     <th>Total</th>
                 </tr>
             </thead>
             <tbody>
-                {% for sale in sales %}
-                    <tr>
-                        <td>{{ sale.customer.name }}</td>
-                        <td>{{ sale.date|date:"d/m/Y" }}</td>
-                        <td class="fw-bold text-success">
-                            R$ {{ sale.get_total }}
-                        </td>
-                    </tr>
-                {% empty %}
-                    <tr>
-                        <td colspan="3" class="text-center text-muted">
-                            Nenhum histórico encontrado
-                        </td>
-                    </tr>
-                {% endfor %}
+            {% for sale in sales %}
+                <tr>
+                    <td>{{ sale.customer.name }}</td>
+                    <td>{{ sale.date|date:"d/m/Y" }}</td>
+                    <td>
+                        {% for item in sale.items.all %}
+                            {{ item.product.name }} ({{ item.quantity }})
+                            {% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td class="fw-bold text-success">
+                        R$ {{ sale.get_total }}
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4">Nenhum histórico encontrado</td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>

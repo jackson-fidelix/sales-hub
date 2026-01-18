@@ -1,17 +1,8 @@
 # Sales Hub
 
-Sistema de gerenciamento de vendas.
+Sistema de gerenciamento de vendas, desenvolvido para fins de avaliação técnica.  
 
 Projeto full-stack focado em registrar vendas com regras de negócio específicas, integração com API ViaCEP, busca de produtos e exibição dinâmica de itens/fornecedores.
-
-**Status do Projeto**: Em desenvolvimento
-
-## Tecnologias Utilizadas
-
-- **Backend**: Python 3 + Django
-- **Frontend**: JavaScript (fetch) + Bootstrap 5
-- **Banco de Dados**: PostgreSQL
-- **Integração Externa**: [ViaCEP](https://viacep.com.br/) (consulta automática de endereço por CEP)
 
 ## Funcionalidades Implementadas (Core do Desafio)
 
@@ -29,26 +20,117 @@ Projeto full-stack focado em registrar vendas com regras de negócio específica
 - Uma venda pode ter múltiplos produtos e múltiplos fornecedores por produto
 - O cliente consegue ver seu histórico de compra
 
-### Plus Implementados (ou em andamento)
+---
+
+## Tecnologias Utilizadas
+
+- **Backend**: Python 3 + Django
+- **Frontend**: HTML, CSS, JavaScript + Bootstrap 5
+- **Banco de Dados**: PostgreSQL
+- **Integração Externa**: [ViaCEP](https://viacep.com.br/) (consulta automática de endereço por CEP)
+
+### Plus Implementados
 
 - Sistema responsivo (Bootstrap)
 - Validações de campo para se realizar uma venda (frontend + backend)
-- Tela de login/autenticação de usuários
-- Realizar e apresentar em uma documentação o resultado de Testes unitários
 
-**Não implementado (fora do escopo do desafio)**: Cadastro de produtos e fornecedores (dados seedados via fixtures ou admin)
+## 🛠️ Passo a passo para rodar o projeto
 
-## Como Rodar o Projeto (Passo a Passo)
-
-### Pré-requisitos
-
-- Python 3.10+
-- PostgreSQL instalado e rodando
-- Git
-
-### Instalação
-
-1. Clone o repositório
-   ```bash
+### 1. Clone o repositório
    git clone https://github.com/jackson-fidelix/sales-hub.git
    cd sales-hub
+
+### 2. Crie e ative o ambiente virtual
+  python -m venv venv
+
+### 3. Instale as dependências
+  pip install -r requirements.txt
+
+### 4. Configure o PostgreSQL
+- Crie um banco de dados no PostgreSQL:
+- Nome: sales_hub_db (ou o nome que você preferir)
+- Usuário: seu_usuario
+- Senha: sua_senha
+
+###  5.Em seguida, ajuste o settings.py do core. Ex:
+  DATABASES = {
+      'default': {
+          'ENGINE': 'django.db.backends.sqlite3',
+          'NAME': 'sales_hub_db',
+          'USER': 'postgres',
+          'PASSWORD': 'Postgre2026#',
+          'HOST': 'localhost',
+          'PORT': '5432',
+      }
+  }
+
+### 6. Rode as migrations
+  python manage.py makemigrations (nome do seu app)
+  python manage.py migrate
+
+### 7. Criar superuser (admin)
+- Com isso voce pode acessar a tela admin do sistema. Comando:
+  python manage.py createsuperuser
+
+---
+
+🚦 Como usar o sistema:
+
+### 1. Rodar o servidor
+  python manage.py runserver
+- Acesse no navegador:
+  http://127.0.0.1:8000/
+  
+- Você verá essa tela:
+![alt text](image-1.png)
+
+### 2. Registrar uma venda
+- Clique em "Nova Venda".
+- Você verá essa tela:
+![alt text](image-2.png)
+
+- Adicione cliente e produtos
+- Clique em Registrar Venda
+- Confirme que a venda foi salva no Admin
+
+### 3. Verificar no Admin
+  http://localhost:8000/admin
+
+- Verifique:
+- Sale
+- SaleItem
+- Product
+
+### 4. Consultar Produtos
+- Acesse Consultar Produtos
+- Teste a busca por nome
+
+- Você verá essa tela:
+![alt text](image-3.png)
+
+### 5. Histórico de vendas
+- Acesse Histórico
+- Teste filtro por cliente
+- Confira se mostra os produtos da venda
+
+- Você verá essa tela:
+![alt text](image-4.png)
+
+---
+
+📌 Rotas do Projeto
+| Página             | URL                   | Descrição                       |
+| ------------------ | --------------------- | ------------------------------- |
+| Home               | `/`                   | Página inicial                  |
+| Nova Venda         | `/vendas/nova/`       | Formulário para registrar venda |
+| Consultar Produtos | `/produtos/consulta/` | Lista e busca de produtos       |
+| Histórico          | `/vendas/historico/`  | Histórico de vendas por cliente |
+| Admin              | `/admin/`             | Dashboard administrativo        |
+
+---
+
+📌 Contato
+GitHub: https://github.com/jackson-fidelix/
+LinkedIn: https://www.linkedin.com/in/jacksonfidelix/
+Instagram: https://www.instagram.com/_jacksonfidelix/
+Autor: Jackson Felipe Fidelix
