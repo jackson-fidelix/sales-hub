@@ -53,17 +53,18 @@ Projeto full-stack focado em registrar vendas com regras de negócio específica
 - Senha: sua_senha
 
 ###  5.Em seguida, ajuste o settings.py do core. Ex:
-  DATABASES = {
-      'default': {
-          'ENGINE': 'django.db.backends.sqlite3',
-          'NAME': 'sales_hub_db',
-          'USER': 'postgres',
-          'PASSWORD': 'Postgre2026#',
-          'HOST': 'localhost',
-          'PORT': '5432',
-      }
-  }
-
+ ```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'sales_hub_db',
+        'USER': 'postgres',
+        'PASSWORD': 'Postgre2026#',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+```
 ### 6. Rode as migrations
   python manage.py makemigrations (nome do seu app)
   python manage.py migrate
@@ -130,7 +131,7 @@ Projeto full-stack focado em registrar vendas com regras de negócio específica
 ---
 
 📌 Contato
-GitHub: https://github.com/jackson-fidelix/
-LinkedIn: https://www.linkedin.com/in/jacksonfidelix/
-Instagram: https://www.instagram.com/_jacksonfidelix/
-Autor: Jackson Felipe Fidelix
+- GitHub: https://github.com/jackson-fidelix/
+- LinkedIn: https://www.linkedin.com/in/jacksonfidelix/
+- Instagram: https://www.instagram.com/_jacksonfidelix/
+- Autor: Jackson Felipe Fidelix
