@@ -18,6 +18,7 @@ class Sale(models.Model):
     delivery_state = models.CharField(max_length=2, verbose_name="Estado")
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Criado por")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Criado em")
+    delivery_number = models.CharField(max_length=10, verbose_name="Número")
 
     def __str__(self):
         return f"Venda #{self.pk} - {self.customer} - {self.date}"

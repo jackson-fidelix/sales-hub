@@ -7,11 +7,12 @@ from products.models import Product, Supplier
 class SaleForm(forms.ModelForm):
     class Meta:
         model = Sale
-        fields = ['date', 'customer', 'delivery_street', 'delivery_neighborhood', 'delivery_city', 'delivery_state']
+        fields = ['date', 'customer', 'delivery_street', 'delivery_number', 'delivery_neighborhood', 'delivery_city', 'delivery_state']
         widgets = {
             'date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'customer': forms.Select(attrs={'class': 'form-control'}),
             'delivery_street': forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
+            'delivery_number': forms.TextInput(attrs={'class': 'form-control'}),
             'delivery_neighborhood': forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
             'delivery_city': forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
             'delivery_state': forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly', 'maxlength': '2'}),
